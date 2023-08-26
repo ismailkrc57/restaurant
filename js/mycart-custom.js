@@ -9,18 +9,8 @@ fetch('./menu.json')
             i++
             let menuButton = '';
             if (i === 1)
-                menuButton = `<a href="#" class="button button--is-active" data-target="${dataKey.toLocaleLowerCase()}Menu">${dataKey}</a>`
-            else menuButton = `<a href="#" class="button" data-target="${dataKey.toLocaleLowerCase()}Menu">${dataKey}</a>`
-
-            let buttonNew =`   <div class="collapse navbar-collapse" id="btnnvbarsExampleDefault">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
-                                   ${menuButton}
-                                </li>
-
-                            </ul>
-
-                        </div>`
+                menuButton = `<a href="#"  class="button button--is-active" data-target="${dataKey.toLocaleLowerCase()}Menu">${dataKey}</a>`
+            else menuButton = `<a href="#"  class="button" data-target="${dataKey.toLocaleLowerCase()}Menu">${dataKey}</a>`
             buttonsContainer.insertAdjacentHTML('beforeend', menuButton);
         }
         let j = 0;
@@ -78,8 +68,11 @@ fetch('./menu.json')
 
         function handleClick(e) {
             e.preventDefault();
-
-            buttonsX.forEach(button => button.classList.remove('button--is-active'));
+            const collapse = document.getElementById("collapseExample");
+            buttonsX.forEach(button => {
+                button.classList.remove('button--is-active')
+                collapse.classList.remove('show')
+            });
             this.classList.add('button--is-active');
 
             // Set current dimensions and position of 'highlight' based on the clicked button
@@ -106,6 +99,7 @@ fetch('./menu.json')
         window.addEventListener('resize', initialHightlightLocation);
         buttonsX.forEach(button => button.addEventListener('click', handleClick));
     });
+
 
 
 //mycart
